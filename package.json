@@ -11,7 +11,8 @@
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "watch": "tsc -w",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "commitmsg": "commitlint -E HUSKY_GIT_PARAMS"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
