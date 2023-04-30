@@ -1,6 +1,7 @@
+import { AppMiddlewares } from "@/middleware";
 import "dotenv/config";
 import express, { Application } from "express";
-import { AppMiddlewares } from "./middleware";
+import "module-alias/register";
 
 class App {
   private app: Application;
