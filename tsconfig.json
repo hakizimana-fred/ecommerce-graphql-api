@@ -21,7 +21,11 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "baseUrl": "."
+    "baseUrl": "src",
+    "paths": {
+      "@/middleware/*": ["middleware/*"],
+      "@/middleware": ["middleware/index"]
+    }
   },
   "exclude": ["node_modules"],
   "include": ["./src/**/*.ts"]
