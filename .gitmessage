@@ -1,0 +1,14 @@
+# <type>/FOO-<jira-ticket-id>: <title>
+# YOU CAN WRITE WHATEVER YOU WANT HERE
+# allowed types: feat | fix | hot | chore
+# Example:
+#
+# feat/FOO-01: first commit
+#
+# No more than 50 chars. #### 50 chars is here:  #
+
+# Remember blank line between title and body.
+
+# Body: Explain *what* and *why* (not *how*)
+# Wrap at 72 chars. ################################## which is here:  #
+#
