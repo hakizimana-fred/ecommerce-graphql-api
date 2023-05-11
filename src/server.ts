@@ -1,4 +1,5 @@
 import { AppMiddlewares } from "@/middleware";
+import { UserResolver } from "@/resolvers";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
@@ -7,6 +8,8 @@ import "dotenv/config";
 import express, { Application } from "express";
 import { createServer } from "http";
 import "module-alias/register";
+import "reflect-metadata";
+import { buildSchema } from "type-graphql";
 
 const typeDefs = `#graphql
   type Query {
@@ -38,8 +41,10 @@ class App {
 
   public async apolloServerInit() {
     this.apolloServer = new ApolloServer({
-      typeDefs,
-      resolvers,
+      schema: await buildSchema({
+        resolvers: [UserResolver],
+        validate: false,
+      }),
       plugins: [
         ApolloServerPluginDrainHttpServer({ httpServer: this.httpServer }),
       ],
