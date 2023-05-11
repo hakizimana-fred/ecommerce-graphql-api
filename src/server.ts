@@ -1,19 +1,19 @@
 import { AppMiddlewares } from "@/middleware";
 import { ApolloServer } from "@apollo/server";
+import { expressMiddleware } from "@apollo/server/express4";
+import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 import { connectDb } from "config/db";
 import "dotenv/config";
 import express, { Application } from "express";
 import { createServer } from "http";
 import "module-alias/register";
 
-// The GraphQL schema
 const typeDefs = `#graphql
   type Query {
     hello: String
   }
 `;
 
-// A map of functions which return data for the schema.
 const resolvers = {
   Query: {
     hello: () => "world",
@@ -40,9 +40,12 @@ class App {
     this.apolloServer = new ApolloServer({
       typeDefs,
       resolvers,
+      plugins: [
+        ApolloServerPluginDrainHttpServer({ httpServer: this.httpServer }),
+      ],
     });
     await this.apolloServer.start();
-    this.app.use(expressMiddleware(this.apolloServer));
+    this.app.use(express.json(), expressMiddleware(this.apolloServer));
   }
 
   public async initServer() {
@@ -56,6 +59,3 @@ class App {
 }
 
 new App();
-function expressMiddleware(server: any): any {
-  throw new Error("Function not implemented.");
-}
