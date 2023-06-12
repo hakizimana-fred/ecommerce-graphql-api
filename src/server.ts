@@ -1,27 +1,17 @@
+import "reflect-metadata";
+
 import { AppMiddlewares } from "@/middleware";
 import { UserResolver } from "@/resolvers";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 import { connectDb } from "config/db";
+import "core-js/es/reflect";
 import "dotenv/config";
 import express, { Application } from "express";
 import { createServer } from "http";
 import "module-alias/register";
-import "reflect-metadata";
 import { buildSchema } from "type-graphql";
-
-const typeDefs = `#graphql
-  type Query {
-    hello: String
-  }
-`;
-
-const resolvers = {
-  Query: {
-    hello: () => "world",
-  },
-};
 
 class App {
   private app: Application;
